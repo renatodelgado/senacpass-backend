@@ -7,7 +7,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "typeorm": "typeorm-ts-node-commonjs -d src/shared/infra/database/data-source.ts",
+    "typeorm": "tsx node_modules/typeorm/cli.js -d src/shared/infra/database/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate src/shared/infra/database/migrations/CreateTables",
     "migration:run": "npm run typeorm migration:run"
   },
