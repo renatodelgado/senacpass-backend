@@ -32,9 +32,11 @@ export class Aula {
   })
   status!: StatusAula;
 
-  @Column({ type: 'time' })
-  horario_inicio_previsto!: string;
 
-  @Column({ type: 'time' })
-  horario_fim_previsto!: string;
+  @Column({ type: 'timestamp' })
+  horario_inicio_previsto!: Date;
+
+
+  @Column({ type: 'timestamp' })
+  horario_fim_previsto!: Date;
 }

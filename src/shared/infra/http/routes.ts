@@ -4,11 +4,15 @@ import { professorRoutes } from '../../../modules/professores/routes/professor.r
 import { turmaRoutes } from '../../../modules/turmas/routes/turma.routes'
 import { aulaRoutes } from '../../../modules/aulas/routes/aula.routes'
 import { authMiddleware } from '../../middlewares/authMiddleware'
+import { rfidRoutes } from '../../../modules/rfid/rfidRoutes' 
 
 const router = Router()
 
 // Rota pública
 router.use('/professores', professorRoutes)
+
+// RFID (público)
+router.use('/rfid', rfidRoutes)
 
 // Rotas protegidas
 router.use('/alunos', authMiddleware, alunoRoutes)
