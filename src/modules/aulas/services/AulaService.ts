@@ -38,4 +38,15 @@ export class AulaService {
     await this.buscarPorId(id)
     await this.aulaRepository.delete(id)
   }
+
+  // 🔥 NOVO MÉTODO (REGRA DE NEGÓCIO)
+  async buscarAulaAtiva(): Promise<Aula> {
+    const aula = await this.aulaRepository.buscarAulaAtiva()
+
+    if (!aula) {
+      throw new Error('Nenhuma aula ativa no momento')
+    }
+
+    return aula
+  }
 }

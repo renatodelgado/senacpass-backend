@@ -4,6 +4,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import pinoHttp from 'pino-http'
 import { router } from './shared/infra/http/routes'
+import { rfidRoutes } from '@modules/rfid/rfidRoutes'
 
 const app = express()
 
@@ -17,5 +18,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', router)
+app.use('/api', rfidRoutes)
 
 export { app }

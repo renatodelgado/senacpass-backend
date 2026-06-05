@@ -1,6 +1,7 @@
 import { Aula } from '../entities/Aula'
 
 export interface IAulaRepository {
+  [x: string]: any
   findById(id: string): Promise<Aula | null>
   findAll(): Promise<Aula[]>
   findByTurma(id_turma: string): Promise<Aula[]>
