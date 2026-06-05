@@ -1,0 +1,64 @@
+import { Request, Response } from 'express'
+import { ProfessorService } from '../services/ProfessorService'
+import { ProfessorRepository } from '../repositories/ProfessorRepository'
+
+export class ProfessorController {
+  private service: ProfessorService
+
+  constructor() {
+    this.service = new ProfessorService(new ProfessorRepository())
+  }
+
+  listarTodos = async (req: Request, res: Response): Promise<Response> => {
+    const professores = await this.service.listarTodos()
+    return res.json(professores)
+  }
+
+  buscarPorId = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const professor = await this.service.buscarPorId(req.params.id as string)
+      const { senha_hash, ...resto } = professor
+      return res.json(resto)
+    } catch (error: any) {
+      return res.status(404).json({ message: error.message })
+    }
+  }
+
+  criar = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const professor = await this.service.criar(req.body)
+      return res.status(201).json(professor)
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message })
+    }
+  }
+
+  login = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { email, senha } = req.body
+      const resultado = await this.service.login(email, senha)
+      return res.json(resultado)
+    } catch (error: any) {
+      return res.status(401).json({ message: error.message })
+    }
+  }
+
+  atualizar = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const professor = await this.service.atualizar(req.params.id as string, req.body)
+      const { senha_hash, ...resto } = professor
+      return res.json(resto)
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message })
+    }
+  }
+
+  deletar = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      await this.service.deletar(req.params.id as string)
+      return res.status(204).send()
+    } catch (error: any) {
+      return res.status(404).json({ message: error.message })
+    }
+  }
+}
