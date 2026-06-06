@@ -10,8 +10,12 @@ export class TurmaController {
   }
 
   listarTodos = async (req: Request, res: Response): Promise<Response> => {
-    const turmas = await this.service.listarTodos()
-    return res.json(turmas)
+    try {
+      const turmas = await this.service.listarTodos()
+      return res.json(turmas)
+    } catch (error: any) {
+      return res.status(500).json({ message: 'Erro ao listar turmas', error: error.message })
+    }
   }
 
   buscarPorId = async (req: Request, res: Response): Promise<Response> => {
@@ -20,6 +24,16 @@ export class TurmaController {
       return res.json(turma)
     } catch (error: any) {
       return res.status(404).json({ message: error.message })
+    }
+  }
+
+  // Novo método para integrar com a rota do painel do professor
+  listarPorProfessor = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const turmas = await this.service.listarPorProfessor(req.params.id_professor as string)
+      return res.json(turmas)
+    } catch (error: any) {
+      return res.status(400).json({ message: 'Erro ao listar turmas do professor', error: error.message })
     }
   }
 

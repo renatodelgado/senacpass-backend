@@ -16,8 +16,8 @@ export class UnidadeCurricularRepository implements IUnidadeCurricularRepository
   }
 
   async create(data: Partial<UnidadeCurricular>): Promise<UnidadeCurricular> {
-    const unidade = this.repository.create(data)
-    return this.repository.save(unidade)
+    const unidadedata = this.repository.create(data)
+    return this.repository.save(unidadedata)
   }
 
   async save(data: UnidadeCurricular): Promise<UnidadeCurricular> {

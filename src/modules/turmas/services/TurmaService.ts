@@ -14,9 +14,17 @@ export class TurmaService {
     return turma
   }
 
+  // Novo método para expor a busca do repositório
+  async listarPorProfessor(id_professor: string): Promise<Turma[]> {
+    return this.turmaRepository.findByProfessor(id_professor)
+  }
+
   async criar(data: Partial<Turma>): Promise<Turma> {
-    const existente = await this.turmaRepository.findByCodigo(data.codigo_turma!)
+    if (!data.codigo_turma) throw new Error('O código da turma é obrigatório')
+    
+    const existente = await this.turmaRepository.findByCodigo(data.codigo_turma)
     if (existente) throw new Error('Código de turma já cadastrado')
+    
     return this.turmaRepository.create(data)
   }
 

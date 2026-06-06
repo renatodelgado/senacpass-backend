@@ -23,13 +23,34 @@ export class InscricaoTurmaService {
   }
 
   async criar(data: Partial<InscricaoTurma>): Promise<InscricaoTurma> {
+    if (!data.aluno || !data.turma) {
+      throw new Error('Identificadores de Aluno e Turma são obrigatórios.')
+    }
+
+    // Extrai o ID do aluno e da turma tratando se vier como objeto completo ou string string formatada
+    const idAluno = typeof data.aluno === 'string' ? data.aluno : (data.aluno as any).id_aluno
+    const idTurmaNova = typeof data.turma === 'string' ? data.turma : (data.turma as any).id_turma
+
+    // Busca as inscrições atuais que o aluno possui
+    const inscricoesExistentes = await this.repository.findByAluno(idAluno)
+
+    // Confere se alguma das inscrições do aluno já bate com a turma enviada
+    const jaCadastrado = inscricoesExistentes.some((ins) => {
+      const idTurmaAtual = typeof ins.turma === 'string' ? ins.turma : ins.turma?.id_turma
+      return idTurmaAtual === idTurmaNova
+    })
+
+    if (jaCadastrado) {
+      throw new Error('Este aluno já está matriculado nesta turma!')
+    }
+
     return this.repository.create(data)
   }
 
   async atualizar(id: string, data: Partial<InscricaoTurma>): Promise<InscricaoTurma> {
-    const inscricao = await this.buscarPorId(id)
-    Object.assign(inscricao, data)
-    return this.repository.save(inscricao)
+    const src = await this.buscarPorId(id)
+    Object.assign(src, data)
+    return this.repository.save(src)
   }
 
   async atualizarStatus(id: string, status: StatusInscricao): Promise<InscricaoTurma> {

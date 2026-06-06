@@ -46,6 +46,15 @@ export class AulaController {
     }
   }
 
+  buscarAulaAtiva = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const aula = await this.service.buscarAulaAtiva()
+    return res.json(aula)
+  } catch (error: any) {
+    return res.status(404).json({ message: error.message })
+  }
+}
+
   atualizarStatus = async (req: Request, res: Response): Promise<Response> => {
     try {
       const aula = await this.service.atualizarStatus(req.params.id as string, req.body.status)

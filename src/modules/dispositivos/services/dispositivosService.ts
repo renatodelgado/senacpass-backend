@@ -15,8 +15,13 @@ export class DispositivoService {
     return this.repo.create(data)
   }
 
-  atualizar(id: string, data: any) {
-    return this.repo.save({ ...data, id_dispositivo: id })
+  async atualizar(id: string, data: any) {
+    const dispositivo = await this.repo.findById(id);
+    if (!dispositivo) {
+      throw new Error('Dispositivo não encontrado');
+    }
+    Object.assign(dispositivo, data);
+    return this.repo.save(dispositivo);
   }
 
   deletar(id: string) {

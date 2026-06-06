@@ -4,7 +4,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import pinoHttp from 'pino-http'
 import { router } from './shared/infra/http/routes'
-import { rfidRoutes } from '@modules/rfid/rfidRoutes'
 
 const app = express()
 
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
   return res.json({ message: 'API funcionando 🚀' })
 })
 
+// Centraliza todos os endpoints sob o prefixo /api (Ex: /api/presencas)
 app.use('/api', router)
-app.use('/api', rfidRoutes)
 
 export { app }

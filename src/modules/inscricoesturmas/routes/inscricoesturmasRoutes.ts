@@ -4,12 +4,12 @@ import { InscricaoTurmaController } from '../controllers/inscricoesturmasControl
 const routes = Router()
 const controller = new InscricaoTurmaController()
 
-routes.get('/', controller.listarTodos)
-routes.get('/:id', controller.buscarPorId)
-routes.get('/aluno/:id_aluno', controller.listarPorAluno)
-routes.get('/turma/:id_turma', controller.listarPorTurma)
-routes.post('/', controller.criar)
-routes.patch('/:id/status', controller.atualizarStatus)
-routes.delete('/:id', controller.deletar)
+routes.get('/', (req, res) => controller.listarTodos(req, res))
+routes.get('/:id', (req, res) => controller.buscarPorId(req, res))
+routes.get('/aluno/:id_aluno', (req, res) => controller.listarPorAluno(req, res))
+routes.get('/turma/:id_turma', (req, res) => controller.listarPorTurma(req, res))
+routes.post('/', (req, res) => controller.criar(req, res))
+routes.patch('/:id/status', (req, res) => controller.atualizarStatus(req, res))
+routes.delete('/:id', (req, res) => controller.deletar(req, res))
 
 export { routes as inscricaoTurmaRoutes }

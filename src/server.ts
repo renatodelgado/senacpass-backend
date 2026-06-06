@@ -8,12 +8,12 @@ const PORT = process.env.PORT || 3333
 
 AppDataSource.initialize()
   .then(() => {
-    console.log('📦 Database connected')
+    console.log('📦 Database connected successfully')
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`)
     })
   })
   .catch(error => {
-    console.error(error)
+    console.error('❌ Error during Data Source initialization:', error)
   })

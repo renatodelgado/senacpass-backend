@@ -8,7 +8,11 @@ export class ProfessorService {
 
   async listarTodos(): Promise<Omit<Professor, 'senha_hash'>[]> {
     const professores = await this.professorRepository.findAll()
-    return professores.map(({ senha_hash, ...resto }) => resto as Professor)
+    // Ajustado o map para remover a senha de forma limpa e segura
+    return professores.map(prof => {
+      const { senha_hash, ...resto } = prof
+      return resto
+    })
   }
 
   async buscarPorId(id: string): Promise<Professor> {
@@ -29,7 +33,7 @@ export class ProfessorService {
     })
 
     const { senha_hash: _, ...resto } = professor
-    return resto as Professor
+    return resto
   }
 
   async login(email: string, senha: string): Promise<{ token: string }> {

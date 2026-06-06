@@ -2,7 +2,6 @@ import { Request, Response } from 'express'
 import { UnidadeCurricularService } from '../services/unidadescurricularesServices'
 import { UnidadeCurricularRepository } from '../repositories/unidadescurricularesRepositories'
 
-// Tipagem dos params
 type IdParams = {
   id: string
 }
@@ -23,10 +22,7 @@ export class UnidadeCurricularController {
     }
   }
 
-  buscarPorId = async (
-    req: Request<IdParams>,
-    res: Response
-  ): Promise<Response> => {
+  buscarPorId = async (req: Request<IdParams>, res: Response): Promise<Response> => {
     try {
       const data = await this.service.buscarPorId(req.params.id)
       return res.json(data)
@@ -44,10 +40,7 @@ export class UnidadeCurricularController {
     }
   }
 
-  atualizar = async (
-    req: Request<IdParams>,
-    res: Response
-  ): Promise<Response> => {
+  atualizar = async (req: Request<IdParams>, res: Response): Promise<Response> => {
     try {
       const data = await this.service.atualizar(req.params.id, req.body)
       return res.json(data)
@@ -56,10 +49,7 @@ export class UnidadeCurricularController {
     }
   }
 
-  deletar = async (
-    req: Request<IdParams>,
-    res: Response
-  ): Promise<Response> => {
+  deletar = async (req: Request<IdParams>, res: Response): Promise<Response> => {
     try {
       await this.service.deletar(req.params.id)
       return res.status(204).send()

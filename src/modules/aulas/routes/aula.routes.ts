@@ -11,5 +11,6 @@ aulaRoutes.post('/', controller.criar)
 aulaRoutes.put('/:id', controller.atualizar)
 aulaRoutes.patch('/:id/status', controller.atualizarStatus)
 aulaRoutes.delete('/:id', controller.deletar)
+aulaRoutes.get('/status/ativa', (req, res) => controller.buscarAulaAtiva(req, res));
 
 export { aulaRoutes }

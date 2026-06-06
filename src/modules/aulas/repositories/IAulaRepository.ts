@@ -5,6 +5,7 @@ export interface IAulaRepository {
   findById(id: string): Promise<Aula | null>
   findAll(): Promise<Aula[]>
   findByTurma(id_turma: string): Promise<Aula[]>
+  buscarAulaAtiva(): Promise<Aula | null>;
   create(data: Partial<Aula>): Promise<Aula>
   save(aula: Aula): Promise<Aula>
   delete(id: string): Promise<void>

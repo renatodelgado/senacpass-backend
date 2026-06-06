@@ -10,8 +10,12 @@ export class ProfessorController {
   }
 
   listarTodos = async (req: Request, res: Response): Promise<Response> => {
-    const professores = await this.service.listarTodos()
-    return res.json(professores)
+    try {
+      const professores = await this.service.listarTodos()
+      return res.json(professores)
+    } catch (error: any) {
+      return res.status(500).json({ message: 'Erro ao listar professores', error: error.message })
+    }
   }
 
   buscarPorId = async (req: Request, res: Response): Promise<Response> => {
