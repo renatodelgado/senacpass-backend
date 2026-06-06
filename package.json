@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node -r module-alias/register dist/server.js",
     "typeorm": "tsx node_modules/typeorm/cli.js -d src/shared/infra/database/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate src/shared/infra/database/migrations/CreateTables",
     "migration:run": "npm run typeorm migration:run"
+  },
+  "_moduleAliases": {
+    "@modules": "dist/modules",
+    "@shared": "dist/shared"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +26,7 @@
     "express": "^5.2.1",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
+    "module-alias": "^2.3.4",
     "pg": "^8.21.0",
     "pino": "^10.3.1",
     "pino-http": "^11.0.0",

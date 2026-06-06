@@ -1,3 +1,5 @@
+import 'module-alias/register'
+import 'reflect-metadata'
 import dotenv from 'dotenv'
 import { app } from './app'
 import { AppDataSource } from './shared/infra/database/data-source'
