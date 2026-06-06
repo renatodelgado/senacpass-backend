@@ -63,4 +63,10 @@ export class ProfessorService {
     await this.buscarPorId(id)
     await this.professorRepository.delete(id)
   }
+
+  async listarAulasAtivas(id: string): Promise<any[]> {
+    const professor = await this.buscarPorId(id)
+    return this.professorRepository.findAulasAtivas(professor.id_professor)
+  }
+  
 }

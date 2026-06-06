@@ -2,6 +2,7 @@ import { RegistroPresenca } from '../entities/RegistroPresenca'
 import { AppDataSource } from '../../../shared/infra/database/data-source'
 
 export class PresencaRepository {
+
   private repo = AppDataSource.getRepository(RegistroPresenca)
 
   async findAll(): Promise<RegistroPresenca[]> {
@@ -44,4 +45,17 @@ export class PresencaRepository {
   async save(data: RegistroPresenca): Promise<RegistroPresenca> {
     return this.repo.save(data)
   }
+
+  async findByAula(id_aula: string): Promise<RegistroPresenca[]> {
+    return this.repo.find({
+      where: {
+        aula: { id_aula }
+      },
+      relations: {
+        aluno: true,
+        aula: true
+      }
+    })
+  }
+  
 }

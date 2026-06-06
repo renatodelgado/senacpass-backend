@@ -43,4 +43,14 @@ export class PresencaController {
       return res.status(400).json({ message: error.message })
     }
   }
+
+  presencaPorAula = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { id_aula } = req.params
+      const presencas = await this.service.listarPorAula(id_aula as string)
+      return res.json(presencas)
+    } catch (error: any) {
+      return res.status(500).json({ message: 'Erro ao listar presenças por aula', error: error.message })
+    }
+  }
 }

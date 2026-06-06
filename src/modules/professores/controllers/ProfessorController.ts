@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { ProfessorService } from '../services/ProfessorService'
 import { ProfessorRepository } from '../repositories/ProfessorRepository'
+import { Aula } from '@modules/aulas/entities/Aula'
+import { AppDataSource } from '../../../shared/infra/database/data-source'
 
 export class ProfessorController {
   private service: ProfessorService
@@ -65,4 +67,24 @@ export class ProfessorController {
       return res.status(404).json({ message: error.message })
     }
   }
+
+  async buscarAulasAtivasDoProfessor(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    try {
+      const aulasAtivas = await AppDataSource
+        .getRepository(Aula)
+        .createQueryBuilder('aula')
+        .innerJoinAndSelect('aula.turma', 'turma')
+        .where('aula.status = :status', { status: 'EM_ANDAMENTO' })
+        .andWhere('turma.professor = :idProfessor', { idProfessor: id })
+        .getMany();
+
+      return res.json(aulasAtivas);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Erro ao buscar aulas ativas do professor', error: error.message });
+    }
+  }
+
+  
 }

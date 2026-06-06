@@ -132,5 +132,12 @@ export class PresencaService {
         presenca: presencaAtualizada
       }
     }
+
+
   }
+
+  async listarPorAula(id_aula: string): Promise<RegistroPresenca[]> {
+    return this.repo.findByAula(id_aula)
+  }
+
 }

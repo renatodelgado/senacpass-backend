@@ -7,4 +7,6 @@ export interface IProfessorRepository {
   create(data: Partial<Professor>): Promise<Professor>
   save(professor: Professor): Promise<Professor>
   delete(id: string): Promise<void>
+  findAulasAtivas(id_professor: string): Promise<any[]>
+
 }
