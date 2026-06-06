@@ -6,7 +6,7 @@
   
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc && tsc-alias",
+    "build": "tsc && npx tsc-alias",
     "start": "node -r module-alias/register dist/server.js",
     "typeorm": "tsx node_modules/typeorm/cli.js -d src/shared/infra/database/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate src/shared/infra/database/migrations/CreateTables",
