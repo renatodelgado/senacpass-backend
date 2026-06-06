@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegistroPresenca } from '../entities/RegistroPresenca'
 import { AppDataSource } from '../../../shared/infra/database/data-source'
 

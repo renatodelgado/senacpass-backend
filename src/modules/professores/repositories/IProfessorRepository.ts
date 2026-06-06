@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Professor } from '../entities/Professor'
 
 export interface IProfessorRepository {

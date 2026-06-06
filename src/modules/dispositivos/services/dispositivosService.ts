@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DispositivoRepository } from "../repositories/dispositivosRepositories"
 
 export class DispositivoService {

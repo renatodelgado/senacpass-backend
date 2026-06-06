@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { Professor } from '../entities/Professor'

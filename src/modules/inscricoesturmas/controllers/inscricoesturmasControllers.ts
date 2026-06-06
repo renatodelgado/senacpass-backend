@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { InscricaoTurmaService } from '../services/inscricoesturmasServices'
 import { InscricaoTurmaRepository } from '../repositories/inscricoesturmasRepositories'

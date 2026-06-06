@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppDataSource } from '../../../shared/infra/database/data-source'
 import { RegistroPresenca, StatusPresenca } from "../entities/RegistroPresenca" // Importado o seu Enum daqui
 import { PresencaRepository } from "../repositories/registrospresencasRepositories"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LogAcessoRepository } from "../repositories/logacessosRepositories"
 import { LogAcesso } from "../entities/LogAcesso"
 

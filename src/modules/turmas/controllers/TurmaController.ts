@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { TurmaService } from '../services/TurmaService'
 import { TurmaRepository } from '../repositories/TurmaRepository'

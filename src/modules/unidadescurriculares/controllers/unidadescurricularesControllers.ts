@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { UnidadeCurricularService } from '../services/unidadescurricularesServices'
 import { UnidadeCurricularRepository } from '../repositories/unidadescurricularesRepositories'

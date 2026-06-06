@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InscricaoTurma, StatusInscricao } from '../entities/InscricaoTurma'
 import { IInscricaoTurmaRepository } from '../repositories/IInscricaoTurmaRepository'
 
