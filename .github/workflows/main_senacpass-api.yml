@@ -62,4 +62,5 @@ jobs:
           app-name: 'senacpass-api'
           slot-name: 'Production'
           package: .
+          startup-command: 'node dist/server.js'
           
