@@ -59,12 +59,12 @@ Faculdade Senac PE - Pernambuco
 
 | Nome | Função |
 |---|---|
-| João Victor Rodrigues Basante | A definir |
-| João Vitor Malveira da Silva | A definir |
-| Maria Clara de Melo | A definir |
-| Renato Trancoso Branco Delgado | A definir |
-| Thayana Anália dos Santos Lira | A definir |
-| Vinicius Henrique Silva Nascimento | A definir |
+| **Thayana Anália dos Santos Lira** | Gestora do Projeto |
+| **Renato Trancoso Branco Delgado** | Desenvolvedor FullStack & Firmware IoT |
+| **Vinicius Henrique Silva Nascimento** | Administrador de Banco de Dados (DBA) |
+| **João Vitor Malveira da Silva** | Desenvolvedor Back-End |
+| **Maria Clara de Melo** | Desenvolvedora Back-End |
+| **João Victor Rodrigues Basante** | Desenvolvedor Front-End |
 
 </div>
 
@@ -971,22 +971,15 @@ Automated tests, OpenAPI documentation, role-based authorization, rate limiting 
 
 ## Dossiê de Evidências
 
-### API Backend
+### Aplicação
 
-> Inserir capturas das requisições e respostas realizadas no Postman, Insomnia ou ferramenta equivalente.
+<img width="1272" height="592" alt="image" src="https://github.com/user-attachments/assets/bc3f6791-976c-4b7c-8763-a2cee19243d6" />
 
-Evidências sugeridas:
-
-- criação e login de professor;
-- acesso autorizado e não autorizado;
-- cadastros acadêmicos;
-- alteração do status de uma aula;
-- check-in, check-out e leitura ignorada;
-- consulta de presenças por aula.
 
 ### Banco de Dados
 
-> Inserir imagem do PostgreSQL com as tabelas criadas pelas migrations.
+<img width="1364" height="732" alt="image" src="https://github.com/user-attachments/assets/06fee514-aa12-4ba5-a474-88f97904d4b5" />
+
 
 Tabelas principais:
 
@@ -1002,15 +995,12 @@ Tabelas principais:
 
 ### Dispositivo IoT
 
-> Inserir fotos do ESP32, leitor RFID, montagem e monitor serial.
-
-### Logs e Integração
-
-> Inserir evidências do `pino-http`, logs RFID e comunicação entre hardware, API e frontend.
-
-### Cloud
-
-> Inserir capturas do serviço de aplicação, banco gerenciado, variáveis de ambiente e logs de implantação.
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/188b44cc-47ec-45ff-a0e7-c231f39641a7" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/3f4cbbaf-a2f5-4a59-8cf8-101d08b6e263" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/c91a84f6-c21b-4b5e-a751-9924ddd27cbd" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/15625921-db46-4b46-82a9-802ca80b197c" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/a37d29b5-de2d-4e28-91af-e24df2c2c24d" />
+<img width="1200" height="1600" alt="image" src="https://github.com/user-attachments/assets/4acde412-f14e-4eff-9c93-7bd21eedb44c" />
 
 ---
 
@@ -1018,61 +1008,62 @@ Tabelas principais:
 
 | Item | Link | Status |
 |---|---|---|
-| Aplicação Web | [Acessar aplicação](https://black-flower-0aa5e4810.7.azurestaticapps.net/) | Online |
-| API Backend | [Acessar API](https://senacpass-api-amc2eubab9emcxfu.centralus-01.azurewebsites.net/api/) | Informado pelo projeto |
-| Repositório GitHub | A preencher | A preencher |
-| Documentação da API | A preencher | Pendente |
-| Slides | A preencher | A preencher |
-| Vídeo demonstrativo | A preencher | A preencher |
+| Aplicação Web (Front-end) | [Acessar Dashboard](https://black-flower-0aa5e4810.7.azurestaticapps.net/dashboard) | Online |
+| API Backend | [Acessar API](https://senacpass-api-amc2eubab9emcxfu.centralus-01.azurewebsites.net/api/) | Online |
+| Repositório do Front-end | [GitHub - SenacPass Front](https://github.com/renatodelgado/senacpass-frontend) | Disponível |
+| Repositório do Back-end + IoT | [GitHub - SenacPass Back](https://github.com/renatodelgado/senacpass-backend) | Este repositório |
+| Banco de Dados (PostgreSQL) | `senacpass.postgres.database.azure.com` | Protegido (Cloud) |
+| API Backend | [Acessar API](https://senacpass-api-amc2eubab9emcxfu.centralus-01.azurewebsites.net/) | Online |
+| Slides da Apresentação | [Slide](https://www.canva.com/design/DAHIFTZtW4o/4IifhHqrdpLG9GemMxf5Gg/edit) | Disponível |
 
+---
+
+## 🛠️ Código do Dispositivo (IoT)
+
+O código-fonte do firmware que roda na placa **ESP32-C3** está centralizado neste repositório para facilitar a avaliação integrada da banca.
+
+* **Caminho do Código:** `/esp32/senacpass.ino`
+* **Segurança e Configuração:** Seguindo as diretrizes de governança e boas práticas de segurança, as credenciais de rede e os endpoints foram isolados em um arquivo local `secrets.h`, que foi adicionado ao `.gitignore` para evitar a exposição pública de dados sensíveis.
+* **Arquivo de Exemplo:** Na mesma pasta `/esp32`, disponibilizamos o modelo público **`secrets.example.h`** para fins de documentação e build, contendo a estrutura das seguintes variáveis:
+  * `WIFI_SSID`: Nome da rede Sem Fio local.
+  * `WIFI_PASSWORD`: Senha de autenticação da rede.
+  * `API_URL`: Apontando para o nosso backend na Azure (`https://senacpass-api-amc2eubab9emcxfu.centralus-01.azurewebsites.net/api/`).
+ 
 ---
 
 ## Equipe
 
-### João Victor Rodrigues Basante
-
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
-
-### João Vitor Malveira da Silva
-
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
-
-### Maria Clara de Melo
-
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
+### Thayana Anália dos Santos Lira
+**Função:** Gestora do Projeto  
+**Contribuições:** Coordenação da equipe, levantamento de requisitos, divisão de tarefas (Kanban) e garantia do escopo do MVP.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/thayanalira/)*
 
 ### Renato Trancoso Branco Delgado
-
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
-
-### Thayana Anália dos Santos Lira
-
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
+**Função:** Desenvolvedor FullStack e Firmware IoT  
+**Contribuições:** Desenvolvimento do firmware do ESP32, integração do leitor RFID, arquitetura das rotas da API e telas do painel.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/renato-delgado-48372b47/)*
 
 ### Vinicius Henrique Silva Nascimento
+**Função:** Administrador de Banco de Dados (DBA)  
+**Contribuições:** Modelagem de dados relacional, criação e execução das migrations com TypeORM, e garantia da integridade referencial no PostgreSQL.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/vinicius-nascimento-673230244/)*
 
-**Função:** A preencher  
-**Contribuições:** A preencher  
-**GitHub:** A preencher  
-**LinkedIn:** A preencher
+### João Vitor Malveira da Silva
+**Função:** Desenvolvedor Back-End  
+**Contribuições:** Implementação das regras de negócio na Service Layer, controle de check-in/check-out e autenticação via JWT.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/joão-vitor-malveira/)*
+
+### Maria Clara de Melo
+**Função:** Desenvolvedora Back-End  
+**Contribuições:** Criação dos módulos de domínio da API, validação de payloads.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/maria-clara-de-melo-11b145247/)*
+
+### João Victor Rodrigues Basante
+**Função:** Desenvolvedor Front-End  
+**Contribuições:** Construção da interface do usuário, consumo dos endpoints HTTP da API e exibição dos históricos de presença no dashboard.  
+**LinkedIn:** *[Link](https://www.linkedin.com/in/joaobasante/)*
 
 ---
-
 ## Marcas Formativas Senac
 
 ### 1. Domínio Técnico-Científico
@@ -1132,13 +1123,13 @@ Antes da publicação definitiva, a equipe deve confirmar se essa será a licen�
 
 | UC | Professor |
 |---|---|
-| Cloud Computing | Alisom |
-| Comportamento do Consumidor | Paulo Guimarães |
-| Segurança de Sistemas da Informação | Paulo Pimentel |
-| Qualidade de Software | Paulo Pimentel |
-| IoT: Internet das Coisas | Arnott |
-| Análise e Projeto de Sistemas | Marcus |
-| Tech English 4 | Leonardo |
+| Cloud Computing | ALISON VINÍCIUS GOMES DA SILVA |
+| Comportamento do Consumidor | PAULO TAVARES GUIMARÃES |
+| Segurança de Sistemas da Informação | PAULO HENRIQUE WANDERLEY GUIMARÃES PIMENTEL |
+| Qualidade de Software | PAULO HENRIQUE WANDERLEY GUIMARÃES PIMENTEL |
+| IoT: Internet das Coisas | ARNOTT RAMOS CAIADO |
+| Análise e Projeto de Sistemas | MARCUS VINÍCIUS ALMEIDA FERNANDES DE FIGUEIREDO |
+| Tech English 4 | LEONARDO LUCENA TREVAS |
 
 ### Instituição e Comunidade
 
