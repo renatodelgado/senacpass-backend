@@ -2,3 +2,4 @@ node_modules
 dist
 .env
 api.http
+esp32/secrets.h
