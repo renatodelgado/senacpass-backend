@@ -67,15 +67,6 @@ export class PresencaService {
     const minutesDesdeInicio = Math.floor((now.getTime() - inicioAula.getTime()) / 60000)
     const minutosParaFim = Math.floor((fimAula.getTime() - now.getTime()) / 60000)
 
-    // 🚨 DUPLICIDADE: Impede processar novamente se o ciclo de entrada/saída fechou
-    if (presenca?.horario_checkin && presenca?.horario_checkout) {
-      return {
-        tipo: 'IGNORADO',
-        mensagem: 'Presença e Check-out já finalizados para esta aula.',
-        presenca
-      }
-    }
-
     // 🟡 CENÁRIO: CHECK-IN
     if (!presenca) {
       // 🚨 TRAVA DE HORÁRIO: Só permite entrar se a aula já iniciou (horário correto)
@@ -109,7 +100,9 @@ export class PresencaService {
     }
 
     // 🟢 CENÁRIO: CHECK-OUT
-    if (presenca && !presenca.horario_checkout) {
+    // Leituras adicionais substituem o checkout anterior, mantendo apenas a última.
+    if (presenca) {
+      const checkoutAnterior = presenca.horario_checkout
       presenca.horario_checkout = now
 
       const diffMs = presenca.horario_checkout.getTime() - presenca.horario_checkin.getTime()
@@ -129,7 +122,9 @@ export class PresencaService {
         tipo: 'CHECKOUT',
         mensagem: presenca.status === StatusPresenca.AUSENTE
           ? `Check-out salvo. Status alterado para AUSENTE devido à saída antecipada (${minutosParaFim} min antes).`
-          : 'Check-out efetuado com sucesso.',
+          : checkoutAnterior
+            ? 'Check-out atualizado com a leitura mais recente.'
+            : 'Check-out efetuado com sucesso.',
         presenca: presencaAtualizada
       }
     }
