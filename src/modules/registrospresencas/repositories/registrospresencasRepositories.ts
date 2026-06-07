@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RegistroPresenca } from '../entities/RegistroPresenca'
 import { AppDataSource } from '../../../shared/infra/database/data-source'
 
@@ -17,7 +16,7 @@ export class PresencaRepository {
 
   async findById(id: string): Promise<RegistroPresenca | null> {
     return this.repo.findOne({
-      where: { id_log: id } as any, // Ajuste sutil caso a PK na entidade mude de nome
+      where: { id_presenca: id },
       relations: {
         aluno: true,
         aula: true

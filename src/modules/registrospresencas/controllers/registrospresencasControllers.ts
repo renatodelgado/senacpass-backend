@@ -45,6 +45,25 @@ export class PresencaController {
     }
   }
 
+  justificar = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { status, justificativa_manual } = req.body
+      const presenca = await this.service.justificar(
+        req.params.id as string,
+        status,
+        justificativa_manual
+      )
+
+      return res.json({
+        mensagem: 'Falta justificada com sucesso.',
+        presenca
+      })
+    } catch (error: any) {
+      const statusCode = error.message === 'Registro de presença não encontrado.' ? 404 : 400
+      return res.status(statusCode).json({ message: error.message })
+    }
+  }
+
   presencaPorAula = async (req: Request, res: Response): Promise<Response> => {
     try {
       const { id_aula } = req.params

@@ -21,6 +21,31 @@ export class PresencaService {
     return this.repo.findById(id)
   }
 
+  async justificar(
+    id: string,
+    status: string,
+    justificativa_manual: string
+  ): Promise<RegistroPresenca> {
+    if (status !== StatusPresenca.JUSTIFICADO) {
+      throw new Error('O status deve ser JUSTIFICADO.')
+    }
+
+    if (!justificativa_manual?.trim()) {
+      throw new Error('O campo justificativa_manual é obrigatório.')
+    }
+
+    const presenca = await this.repo.findById(id)
+
+    if (!presenca) {
+      throw new Error('Registro de presença não encontrado.')
+    }
+
+    presenca.status = StatusPresenca.JUSTIFICADO
+    presenca.justificativa_manual = justificativa_manual.trim()
+
+    return this.repo.save(presenca)
+  }
+
   async registrarBatidaRFID(rfid_uid: string, id_dispositivo?: string): Promise<any> {
     const now = new Date()
 
@@ -109,11 +134,13 @@ export class PresencaService {
       presenca.tempo_permanencia_minutos = Math.floor(diffMs / 60000)
 
       // 💡 Corrigido: Atribuição usando o Enum correto da entidade
-      if (minutosParaFim >= LIMITE_SAIDA_ANTECIPADA_MIN) {
-        presenca.status = StatusPresenca.AUSENTE
-      } 
-      else if (presenca.status !== StatusPresenca.ATRASADO) {
-        presenca.status = StatusPresenca.PRESENTE
+      if (presenca.status !== StatusPresenca.JUSTIFICADO) {
+        if (minutosParaFim >= LIMITE_SAIDA_ANTECIPADA_MIN) {
+          presenca.status = StatusPresenca.AUSENTE
+        } 
+        else if (presenca.status !== StatusPresenca.ATRASADO) {
+          presenca.status = StatusPresenca.PRESENTE
+        }
       }
 
       const presencaAtualizada = await this.repo.save(presenca)
