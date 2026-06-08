@@ -5,6 +5,7 @@ import { PresencaRepository } from "../repositories/registrospresencasRepositori
 import { AulaRepository } from "../../aulas/repositories/AulaRepository"
 import { LogAcessoRepository } from "../../logacessos/repositories/logacessosRepositories"
 import { Aluno } from "../../alunos/entities/Aluno"
+import { InscricaoTurma, StatusInscricao } from "../../inscricoesturmas/entities/InscricaoTurma"
 
 export class PresencaService {
   constructor(
@@ -19,6 +20,49 @@ export class PresencaService {
 
   async buscar(id: string): Promise<RegistroPresenca | null> {
     return this.repo.findById(id)
+  }
+
+  async criarAusenciaManual(id_aluno: string, id_aula: string): Promise<RegistroPresenca> {
+    const registroExistente = await this.repo.findByAlunoAula(id_aluno, id_aula)
+
+    if (registroExistente) {
+      return registroExistente
+    }
+
+    const aula = await this.aulaRepo.findById(id_aula)
+
+    if (!aula) {
+      throw new Error('Aula não encontrada.')
+    }
+
+    const aluno = await AppDataSource.getRepository(Aluno).findOne({
+      where: { id_aluno }
+    })
+
+    if (!aluno) {
+      throw new Error('Aluno não encontrado.')
+    }
+
+    const inscricaoAtiva = await AppDataSource.getRepository(InscricaoTurma).findOne({
+      where: {
+        aluno: { id_aluno },
+        turma: { id_turma: aula.turma.id_turma },
+        status: StatusInscricao.ATIVO
+      }
+    })
+
+    if (!inscricaoAtiva) {
+      throw new Error('O aluno não possui inscrição ativa na turma desta aula.')
+    }
+
+    return this.repo.create({
+      aluno,
+      aula,
+      horario_checkin: null as unknown as Date,
+      horario_checkout: null as unknown as Date,
+      tempo_permanencia_minutos: 0,
+      status: StatusPresenca.AUSENTE
+    })
   }
 
   async justificar(

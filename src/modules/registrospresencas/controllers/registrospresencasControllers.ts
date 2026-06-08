@@ -27,6 +27,23 @@ export class PresencaController {
   }
 
   // 🔥 ENDPOINT ADAPTADO PARA O ESP32
+  criarAusenciaManual = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const { id_aluno, id_aula } = req.body
+
+      if (!id_aluno || !id_aula) {
+        return res.status(400).json({
+          message: 'Os campos id_aluno e id_aula são obrigatórios.'
+        })
+      }
+
+      const presenca = await this.service.criarAusenciaManual(id_aluno, id_aula)
+      return res.status(201).json(presenca)
+    } catch (error: any) {
+      return res.status(400).json({ message: error.message })
+    }
+  }
+
   criar = async (req: Request, res: Response): Promise<Response> => {
     try {
       const { rfid_uid, id_dispositivo } = req.body

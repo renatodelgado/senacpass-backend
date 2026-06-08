@@ -9,7 +9,9 @@
     "start": "node -r module-alias/register dist/server.js",
     "seed:presencas": "tsx src/scripts/seed-presencas.ts",
     "create:aula-temporaria": "tsx src/scripts/create-temporary-aula.ts",
+    "create:aula-2026-06-08": "tsx src/scripts/create-aula-2026-06-08.ts",
     "create:alunos-rfid": "tsx src/scripts/create-rfid-alunos.ts",
+    "create:henrique-torres": "tsx src/scripts/create-henrique-torres.ts",
     "typeorm": "tsx node_modules/typeorm/cli.js -d src/shared/infra/database/data-source.ts",
     "migration:generate": "npm run typeorm migration:generate src/shared/infra/database/migrations/CreateTables",
     "migration:run": "npm run typeorm migration:run"
